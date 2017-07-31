@@ -25,11 +25,27 @@ function paintToCanvas() {
   }, 16);
 }
 
+function takePhoto() {
+  snap.currentTime = 0;
+  snap.play()
+
+  const data = canvas.toDataURL('image/jpeg');
+  const link = document.createElement('a');
+  link.href = data;
+  link.setAttribute('download', 'handsome');
+  link.textContent = ('Download Image');
+  link.innerHTML = `<img src="${data}" alt="handsome man" />`;
+  strip.insertBefore(link, strip.firstChild);
+}
+
 video.addEventListener('canplay', paintToCanvas)
+$('.take-photo').on('click', takePhoto)
+
 getVideo();
 
 
 module.exports = {
   getVideo,
-  paintToCanvas
+  paintToCanvas,
+  takePhoto
 }
