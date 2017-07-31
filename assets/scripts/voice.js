@@ -28,6 +28,16 @@ function speak(e) {
     speechSynthesis.speak(msg);
   }
 
+  if (transcript.includes('open') && transcript.includes('menu')) {
+    $('.nav').css('visibility', 'visible')
+    $('.nav').show('slide', {
+      direction: 'right'
+    }, 2000);
+  }
+  if ((transcript.includes('exit') || transcript.includes('close')) && transcript.includes('menu')) {
+    $('.nav').css('visibility', 'hidden');
+  }
+
   if (transcript.includes('what') && transcript.includes('weather') && transcript.includes('in')) {
     let weather = 'http://api.openweathermap.org/data/2.5/weather?q=' + `${lastWord(transcript)}` + '&units=Imperial&appid=be4c79b49fa3a22cac7b890800d537b9';
     console.log(weather);

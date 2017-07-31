@@ -9,6 +9,29 @@ html {
   box-sizing: inherit;
 }
 
+.nav {
+  background: rgba(153, 197, 250, 0.79);
+  visibility: hidden;
+  position: fixed;
+  right: 0%;
+  top: 8%;
+  width: 8em;
+  margin-top: -2.5em;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+
+}
+
+ul {
+  list-style: none;
+}
+
+.glyphicon {
+  color: black;
+  font-size: 40px;
+  padding-top: 20px;
+}
+
 .photobooth {
   background:white;
   max-width:150rem;
