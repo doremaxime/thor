@@ -7,6 +7,11 @@ const recognition = new SpeechRecognition();
 const voices = window.speechSynthesis.getVoices()
 const msg = new SpeechSynthesisUtterance();
 
+const contacts = {
+  Max: 'dore.maxime@gmail.com',
+  Michael: 'mrfinneran@gmail.com',
+}
+
 const lastWord = function(transcript) {
   return ("" + transcript).replace(/[\s-]+$/, '').split(/[\s-]/).pop();
 };
@@ -53,6 +58,10 @@ function speak(e) {
     document.querySelector('.strip').lastChild.remove();
   }
 
+  if (transcript.includes('email') && transcript.includes('to')) {
+    let email = contacts[lastWord(transcript)]
+    window.open('mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent by iMax');
+  }
 }
 
 recognition.addEventListener('result', speak);
