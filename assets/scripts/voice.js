@@ -21,7 +21,7 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-  console.log(transcript);
+  console.log('all the transcript is: ' + transcript);
 
   if (transcript.includes('hey Thor')) {
     msg.text = ('How may I help you?');
@@ -45,10 +45,19 @@ function speak(e) {
       dataType: "jsonp",
       url: weather,
     }).then(function(results) {
-      console.log('results');
+      // console.log(results);
       msg.text = ('It is ' + Math.round(results.main.temp) + 'degrees in ' + results.name)
       speechSynthesis.speak(msg);
     })
+  }
+
+  if (transcript.includes('search Google for')) {
+    const search = transcript.slice(18, transcript.length);
+    const googleSearch = function(transcript) {
+      return ('' + transcript).replace(/ /g, '+');
+    };
+    const result = googleSearch(search);
+    window.open('https://www.google.com/search?site=&source=hp&q=' + `${result}`, '_blank');
   }
 
   if (transcript.includes('open') && transcript.includes('portfolio')) {
