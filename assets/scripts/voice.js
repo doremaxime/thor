@@ -4,12 +4,15 @@ const video = require('./video');
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
+let password = false;
 function loadVoices(message) {
   const voices = window.speechSynthesis.getVoices()
   const msg = new SpeechSynthesisUtterance();
   msg.voice = voices[50];
   msg.text = message;
-  speechSynthesis.speak(msg);
+  if(password) {
+    speechSynthesis.speak(msg);
+  }
 };
 
 
@@ -27,9 +30,17 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-    console.log('all the transcript is: ' + transcript);
+    console.log('transcript is: ' + transcript);
 
-  if (transcript.includes('Alfred')) {
+  if (transcript.includes('Skynet')) {
+    if(password) {
+      password = false;
+    } else {
+      password = true;
+    }
+  }
+
+  if (transcript.includes('hey Alfred')) {
     let message = ('Yes sir?');
     loadVoices(message)
   }
