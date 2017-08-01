@@ -4,13 +4,14 @@ const video = require('./video');
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-window.speechSynthesis.onvoiceschanged = function(message) {
+function loadVoices(message) {
   const voices = window.speechSynthesis.getVoices()
   const msg = new SpeechSynthesisUtterance();
   msg.voice = voices[50];
   msg.text = message;
   speechSynthesis.speak(msg);
 };
+
 
 const contacts = {
   Max: 'dore.maxime@gmail.com',
@@ -30,7 +31,7 @@ function speak(e) {
 
   if (transcript.includes('Alfred')) {
     let message = ('Yes sir?');
-    window.speechSynthesis.onvoiceschanged(message)
+    loadVoices(message)
   }
 
   if (transcript.includes('what') && transcript.includes('time')) {
@@ -41,7 +42,7 @@ function speak(e) {
       minutes = '0 ' + minutes;
     }
     let time = ('It is ' + hours + ' ' + minutes)
-    window.speechSynthesis.onvoiceschanged(time)
+    loadVoices(time)
   }
 
   if (transcript.includes('open') && transcript.includes('menu')) {
@@ -62,8 +63,8 @@ function speak(e) {
       url: weather,
     }).then(function(results) {
       // console.log(results);
-      msg.text = ('It is ' + Math.round(results.main.temp) + 'degrees in ' + results.name)
-      speechSynthesis.speak(msg);
+      let message = ('It is ' + Math.round(results.main.temp) + 'degrees in ' + results.name)
+      loadVoices(message);
     })
   }
 
