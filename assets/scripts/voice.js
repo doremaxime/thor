@@ -33,6 +33,17 @@ function speak(e) {
     window.speechSynthesis.onvoiceschanged(message)
   }
 
+  if (transcript.includes('what') && transcript.includes('time')) {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = '0 ' + minutes;
+    }
+    let time = ('It is ' + hours + ' ' + minutes)
+    window.speechSynthesis.onvoiceschanged(time)
+  }
+
   if (transcript.includes('open') && transcript.includes('menu')) {
     $('.nav').css('visibility', 'visible')
     $('.nav').show('slide', {
