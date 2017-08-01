@@ -4,8 +4,13 @@ const video = require('./video');
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-const voices = window.speechSynthesis.getVoices()
-const msg = new SpeechSynthesisUtterance();
+window.speechSynthesis.onvoiceschanged = function(message) {
+  const voices = window.speechSynthesis.getVoices()
+  const msg = new SpeechSynthesisUtterance();
+  msg.voice = voices[50];
+  msg.text = message;
+  speechSynthesis.speak(msg);
+};
 
 const contacts = {
   Max: 'dore.maxime@gmail.com',
@@ -21,11 +26,11 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-  console.log('all the transcript is: ' + transcript);
+    console.log('all the transcript is: ' + transcript);
 
-  if (transcript.includes('hey Thor')) {
-    msg.text = ('How may I help you?');
-    speechSynthesis.speak(msg);
+  if (transcript.includes('Alfred')) {
+    let message = ('Yes sir?');
+    window.speechSynthesis.onvoiceschanged(message)
   }
 
   if (transcript.includes('open') && transcript.includes('menu')) {
