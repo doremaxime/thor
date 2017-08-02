@@ -5,6 +5,11 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  width: 1100px;
+  margin: 0 auto;
+}
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -19,7 +24,6 @@ html {
   margin-top: -2.5em;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-
 }
 
 ul {
@@ -48,6 +52,22 @@ ul {
 
 .take-photo {
   display: none;
+}
+
+.box {
+  position: absolute;
+  // background: red;
+  top: 50px;
+  right: 300px;
+  z-index: 1;
+  color: red;
+}
+
+img {
+  position: absolute;
+  margin: auto;
+  width: 20%;
+  z-index: 1;
 }
 
 .photo {

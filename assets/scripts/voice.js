@@ -15,7 +15,6 @@ function loadVoices(message) {
   }
 };
 
-
 const contacts = {
   Max: 'dore.maxime@gmail.com',
   Michael: 'mrfinneran@gmail.com',
@@ -30,7 +29,7 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-    console.log('transcript is: ' + transcript);
+    // console.log('transcript is: ' + transcript);
 
   if (transcript.includes('Skynet')) {
     if(password) {

@@ -6,13 +6,44 @@ const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
 
 function getVideo() {
-  navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+  navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    })
     .then(localMediaStream => {
       video.src = window.URL.createObjectURL(localMediaStream);
       video.play();
-    }).catch(err => {console.error('oh no', err);
-  });
+    }).catch(err => {
+      console.error('oh no', err);
+    });
 }
+
+function getAverageRGB() {
+  let blockSize = 5; // only visit every 5 pixels
+  let defaultRGB = { r: 0, g: 0, b: 0 }; // for non-supporting envs
+  let i = -4;
+  let rgb = { r: 0, g: 0, b: 0 };
+  let count = 0;
+  let data = ctx.getImageData(290, 0, 10, 10);
+  let length = data.data.length;
+
+  while ((i += blockSize * 4) < length) {
+    ++count;
+    rgb.r += data.data[i];
+    rgb.g += data.data[i + 1];
+    rgb.b += data.data[i + 2];
+  }
+
+  // ~~ used to floor values
+  rgb.r = ~~(rgb.r / count);
+  rgb.g = ~~(rgb.g / count);
+  rgb.b = ~~(rgb.b / count);
+  console.log(rgb);
+  return rgb;
+}
+
+getAverageRGB();
+
 
 function paintToCanvas() {
   const width = video.videoWidth;
@@ -39,10 +70,10 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas)
-$('.take-photo').on('click', takePhoto)
+
+// $('.take-photo').on('click', takePhoto)
 
 getVideo();
-
 
 module.exports = {
   getVideo,
