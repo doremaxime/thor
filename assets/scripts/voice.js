@@ -10,6 +10,7 @@ function loadVoices(message) {
   const msg = new SpeechSynthesisUtterance();
   msg.voice = voices[50];
   msg.text = message;
+  console.log(password);
   if(password) {
     speechSynthesis.speak(msg);
   }
@@ -55,7 +56,7 @@ function speak(e) {
     loadVoices(time)
   }
 
-  if (transcript.includes('open') && transcript.includes('menu')) {
+  if (transcript.includes('open') && transcript.includes('menu') && (password === true)) {
     $('.nav').css('visibility', 'visible')
     $('.nav').show('slide', {
       direction: 'right'

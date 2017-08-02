@@ -20,10 +20,22 @@ function getVideo() {
     });
 }
 
+let menu = false;
 let pixelSetOff = setInterval(function() {
   getAverageRGB()
-  if((rgb.r > 150 && rgb.r < 200) && (rgb.g < 30) && (rgb.b > 60 && rgb.b < 120)) {
+  if((rgb.r > 200 && rgb.r < 250) && (rgb.g > 50 && rgb.g < 120) && (rgb.b > 120 && rgb.b < 200)) {
     console.log('saw that');
+
+    if (menu) {
+      $('.nav').css('visibility', 'hidden');
+    } else {
+      $('.nav').css('visibility', 'visible')
+      $('.nav').show('slide', {
+        direction: 'right'
+      }, 2000);
+    }
+    menu = !menu;
+    console.log('1' + menu);
     let message = 'Top right';
     voice.loadVoices(message);
   }
@@ -35,7 +47,7 @@ function getAverageRGB() {
   let i = -4;
   // let rgb = { r: 0, g: 0, b: 0 };
   let count = 0;
-  let data = ctx.getImageData(10, 10, 100, 100);
+  let data = ctx.getImageData(10, 10, 50, 50);
   let length = data.data.length;
 
   // ctx.fillStyle="#FF0000";
