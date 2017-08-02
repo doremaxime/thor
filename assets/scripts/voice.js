@@ -115,5 +115,6 @@ recognition.addEventListener('end', recognition.start);
 recognition.start();
 
 module.exports = {
+  loadVoices,
   speak
 }

@@ -1,3 +1,5 @@
+const voice = require('./voice');
+
 //video
 const video = document.querySelector('.player');
 const canvas = document.querySelector('.photo');
@@ -18,14 +20,26 @@ function getVideo() {
     });
 }
 
+let pixelSetOff = setInterval(function() {
+  getAverageRGB()
+  if((rgb.r > 150 && rgb.r < 200) && (rgb.g < 30) && (rgb.b > 60 && rgb.b < 120)) {
+    console.log('saw that');
+    let message = 'Top right';
+    voice.loadVoices(message);
+  }
+}, 500);
+
+let rgb = { r: 0, g: 0, b: 0 };
 function getAverageRGB() {
   let blockSize = 5; // only visit every 5 pixels
-  let defaultRGB = { r: 0, g: 0, b: 0 }; // for non-supporting envs
   let i = -4;
-  let rgb = { r: 0, g: 0, b: 0 };
+  // let rgb = { r: 0, g: 0, b: 0 };
   let count = 0;
-  let data = ctx.getImageData(290, 0, 10, 10);
+  let data = ctx.getImageData(10, 10, 100, 100);
   let length = data.data.length;
+
+  // ctx.fillStyle="#FF0000";
+  // ctx.fillRect(290, 0, 10, 10);
 
   while ((i += blockSize * 4) < length) {
     ++count;
@@ -38,12 +52,10 @@ function getAverageRGB() {
   rgb.r = ~~(rgb.r / count);
   rgb.g = ~~(rgb.g / count);
   rgb.b = ~~(rgb.b / count);
-  console.log(rgb);
+  // console.log(rgb);
+
   return rgb;
 }
-
-getAverageRGB();
-
 
 function paintToCanvas() {
   const width = video.videoWidth;
@@ -70,13 +82,11 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas)
-
-// $('.take-photo').on('click', takePhoto)
-
 getVideo();
 
 module.exports = {
   getVideo,
   paintToCanvas,
-  takePhoto
+  takePhoto,
+  getAverageRGB
 }
