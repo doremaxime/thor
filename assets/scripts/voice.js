@@ -3,7 +3,6 @@ const video = require('./video');
 //VOICE
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-
 let password = false;
 
 function loadVoices(message) {
@@ -42,6 +41,7 @@ function speak(e) {
   }
 
   if (password) {
+    document.querySelector('.ear').style.visibility = 'visible';
     if (transcript.includes('hey Alfred')) {
       let message = ('Yes sir?');
       loadVoices(message)
@@ -113,6 +113,8 @@ function speak(e) {
       let email = contacts[lastWord(transcript)]
       window.open('mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax');
     }
+  } else {
+    document.querySelector('.ear').style.visibility = 'hidden';
   }
 }
 
