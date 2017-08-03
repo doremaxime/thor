@@ -23,7 +23,7 @@ function getVideo() {
 let menu = false;
 let pixelSetOff = setInterval(function() {
   getAverageRGB()
-  if((rgb.r > 195 && rgb.r < 255) && (rgb.g > 3 && rgb.g < 142) && (rgb.b > 72 && rgb.b < 172)) {
+  if((rgb.r > 130 && rgb.r < 170) && (rgb.g > 0 && rgb.g < 20) && (rgb.b > 50 && rgb.b < 110)) {
     console.log('saw that');
 
     if (menu) {
@@ -63,7 +63,7 @@ function getAverageRGB() {
   rgb.r = ~~(rgb.r / count);
   rgb.g = ~~(rgb.g / count);
   rgb.b = ~~(rgb.b / count);
-  // console.log(rgb);
+  console.log(rgb);
 
   return rgb;
 }
