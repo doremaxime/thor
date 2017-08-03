@@ -1,6 +1,11 @@
 const video = require('./video');
 
 //VOICE
+let errorMsg = document.getElementById('msg');
+if (!'speechSynthesis' in window) {
+	errorMsg.innerHTML = 'Sorry your browser <strong>does not support</strong> speech synthesis which is a major feature of this website.'
+}
+
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 let password = false;
@@ -8,8 +13,8 @@ let password = false;
 function loadVoices(message) {
   const voices = window.speechSynthesis.getVoices()
   const msg = new SpeechSynthesisUtterance();
-  msg.voice = voices[50];
   msg.text = message;
+  msg.voice = voices[40];
   console.log('password = ' + password);
   if (password) {
     speechSynthesis.speak(msg);
