@@ -10,11 +10,15 @@ window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogn
 const recognition = new SpeechRecognition();
 let password = false;
 
+let voices = [];
+window.speechSynthesis.onvoiceschanged = function() {
+    voices = window.speechSynthesis.getVoices();
+};
+
 function loadVoices(message) {
-  const voices = window.speechSynthesis.getVoices()
   const msg = new SpeechSynthesisUtterance();
   msg.text = message;
-  msg.voice = voices[40];
+  msg.voice = voices[50];
   console.log('password = ' + password);
   if (password) {
     speechSynthesis.speak(msg);
