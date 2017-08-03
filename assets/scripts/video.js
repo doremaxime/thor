@@ -1,4 +1,4 @@
-const voice = require('./voice');
+// const voice = require('./voice');
 
 //video
 const video = document.querySelector('.player');
@@ -23,7 +23,7 @@ function getVideo() {
 let menu = false;
 let pixelSetOff = setInterval(function() {
   getAverageRGB()
-  if((rgb.r > 200 && rgb.r < 250) && (rgb.g > 50 && rgb.g < 120) && (rgb.b > 120 && rgb.b < 200)) {
+  if((rgb.r > 195 && rgb.r < 255) && (rgb.g > 3 && rgb.g < 142) && (rgb.b > 72 && rgb.b < 172)) {
     console.log('saw that');
 
     if (menu) {
@@ -35,9 +35,8 @@ let pixelSetOff = setInterval(function() {
       }, 2000);
     }
     menu = !menu;
-    console.log('1' + menu);
-    let message = 'Top right';
-    voice.loadVoices(message);
+    // let message = 'Top right';
+    // voice.loadVoices(message);
   }
 }, 500);
 
