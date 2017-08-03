@@ -78,7 +78,8 @@ function speak(e) {
         dataType: "jsonp",
         url: weather,
       }).then(function(results) {
-        let message = ('It is ' + Math.round(results.main.temp) + 'degrees in ' + results.name)
+        console.log(results);
+        let message = ('It is ' + Math.round(results.main.temp) + 'degrees in ' + results.name + 'with ' + results.weather[0].description)
         loadVoices(message);
       })
     }
@@ -109,9 +110,9 @@ function speak(e) {
       document.querySelector('.strip').lastChild.remove();
     }
 
-    if (transcript.includes('email') && transcript.includes('to')) {
+    if (transcript.includes('send') && transcript.includes('email') && transcript.includes('to')) {
       let email = contacts[lastWord(transcript)]
-      window.open('mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax');
+      window.location.href = 'mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax';
     }
   } else {
     document.querySelector('.ear').style.visibility = 'hidden';
