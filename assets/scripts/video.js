@@ -6,6 +6,11 @@ const canvas = document.querySelector('.photo');
 const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
+let menu = false;
+let rgb = { r: 0, g: 0, b: 0 };
+let RGBAverage = getAverageRGB();
+// let setRanges = setRGBRange(RGBAverage);
+let colors;
 
 function getVideo() {
   navigator.mediaDevices.getUserMedia({
@@ -20,27 +25,26 @@ function getVideo() {
     });
 }
 
-let menu = false;
 let pixelSetOff = setInterval(function() {
   getAverageRGB()
-  if((rgb.r > 130 && rgb.r < 170) && (rgb.g > 0 && rgb.g < 20) && (rgb.b > 50 && rgb.b < 110)) {
-    console.log('saw that');
 
-    if (menu) {
-      $('.nav').css('visibility', 'hidden');
-    } else {
-      $('.nav').css('visibility', 'visible')
-      $('.nav').show('slide', {
-        direction: 'right'
-      }, 2000);
-    }
-    menu = !menu;
-    // let message = 'Top right';
-    // voice.loadVoices(message);
+  if((rgb.r > colors[0] && rgb.r < colors[1]) && (rgb.g > colors[2] && rgb.g < colors[3]) && (rgb.b > colors[4] && rgb.b < colors[5])) {
+    console.log('saw that');
   }
+
 }, 500);
 
-let rgb = { r: 0, g: 0, b: 0 };
+function setRGBRange(RGBAverage) {
+  let redLow = rgb.r - 30;
+  let redHigh = rgb.r + 30;
+  let greenLow = rgb.g - 30;
+  let greenHigh = rgb.g + 30;
+  let blueLow = rgb.b - 30;
+  let blueHigh = rgb.b + 30;
+  colors = [redLow, redHigh, greenLow, greenHigh, blueLow, blueHigh]
+
+}
+
 function getAverageRGB() {
   let blockSize = 5; // only visit every 5 pixels
   let i = -4;
@@ -63,6 +67,7 @@ function getAverageRGB() {
   rgb.r = ~~(rgb.r / count);
   rgb.g = ~~(rgb.g / count);
   rgb.b = ~~(rgb.b / count);
+  // console.log('getAverageRGB');
   // console.log(rgb);
 
   return rgb;
@@ -93,6 +98,8 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas)
+document.querySelector('.calibrate').addEventListener('click', setRGBRange)
+
 getVideo();
 
 module.exports = {
