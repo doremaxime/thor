@@ -3,26 +3,22 @@ const video = require('./video');
 //VOICE
 let errorMsg = document.getElementById('msg');
 if (!'speechSynthesis' in window) {
-	errorMsg.innerHTML = 'Sorry your browser <strong>does not support</strong> speech synthesis which is a major feature of this website.'
+  errorMsg.innerHTML = 'Sorry your browser <strong>does not support</strong> speech synthesis which is a major feature of this website.'
 }
 
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-let password = false;
 
 let voices = [];
 window.speechSynthesis.onvoiceschanged = function() {
-    voices = window.speechSynthesis.getVoices();
+  voices = window.speechSynthesis.getVoices();
 };
 
 function loadVoices(message) {
   const msg = new SpeechSynthesisUtterance();
+  msg.voice = voices[48];
   msg.text = message;
-  msg.voice = voices[50];
-  console.log('password = ' + password);
-  if (password) {
-    speechSynthesis.speak(msg);
-  }
+  speechSynthesis.speak(msg);
 };
 
 const contacts = {
@@ -39,22 +35,16 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-  // console.log('transcript is: ' + transcript);
+  console.log('transcript is: ' + transcript);
 
-  if (transcript.includes('Skynet')) {
-    if (password) {
-      password = false;
-    } else {
-      password = true;
-    }
-  }
+  if (transcript.includes('hey Skynet')) {
 
-  if (password) {
-    document.querySelector('.ear').style.visibility = 'visible';
-    if (transcript.includes('hey Alfred')) {
-      let message = ('Yes sir?');
-      loadVoices(message)
-    }
+    // developing this function to be able to change the voices female-male
+    // if (transcript.includes('male voice')) {
+    //   let message = ('I now have a male voice');
+    //   let voice = voices[50];
+    //   loadVoices(message, voice);
+    // }
 
     if (transcript.includes('what') && transcript.includes('time')) {
       let date = new Date();
@@ -123,8 +113,6 @@ function speak(e) {
       let email = contacts[lastWord(transcript)]
       window.location.href = 'mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax';
     }
-  } else {
-    document.querySelector('.ear').style.visibility = 'hidden';
   }
 }
 
