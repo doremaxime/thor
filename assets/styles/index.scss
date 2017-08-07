@@ -80,11 +80,20 @@ body {
 	transform: rotateY(180deg);
 }
 
-.photobooth, .board {
+.photobooth,
+.board {
   background: white;
   max-width: 150rem;
-  // margin: 1rem auto;
-  // border-radius:2px;
+}
+
+.calibration-box {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  border: 5px solid red;
+  z-index: 2;
 }
 
 /*clearfix*/
@@ -92,26 +101,6 @@ body {
   content: '';
   display: block;
   clear: both;
-}
-
-.take-photo {
-  display: none;
-}
-
-.box {
-  position: absolute;
-  // background: red;
-  top: 50px;
-  right: 300px;
-  z-index: 1;
-  color: red;
-}
-
-img {
-  position: absolute;
-  margin: auto;
-  width: 20%;
-  z-index: 1;
 }
 
 .photo {
