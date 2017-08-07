@@ -58,7 +58,8 @@ function getAverageRGB() {
   let blockSize = 4; // only visit every 5 pixels
   let i = -4;
   let count = 0;
-  let data = ctx.getImageData(10, 10, 50, 50);
+  // let data = ctx.getImageData(10, 10, 50, 50);
+  let data = ctx.getImageData(0, 430, 50, 50);
   let length = data.data.length;
 
   while ((i += blockSize * 4) < length) {
