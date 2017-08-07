@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thor</title>
-  <style type="text/css"></style>
 
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- prevents FOUC -->
+  <style type="text/css"> .no-fouc {display: none;} </style>
+  <script type="text/javascript"> document.documentElement.className = 'no-fouc'; </script>
+
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
   <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/hammer.png">
 
   <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -16,6 +19,7 @@
 </head>
 
 <body>
+
   <button class="calibrate">calibrate</button>
 
   <p id="msg"></p>
