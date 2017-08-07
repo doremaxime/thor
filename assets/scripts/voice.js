@@ -60,7 +60,7 @@ function speak(e) {
       loadVoices(time)
     }
 
-    if (transcript.includes('open') && transcript.includes('menu') && (password === true)) {
+    if (transcript.includes('open') && transcript.includes('menu')) {
       $('.nav').css('visibility', 'visible')
       $('.nav').show('slide', {
         direction: 'right'
