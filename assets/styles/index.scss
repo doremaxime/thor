@@ -43,6 +43,14 @@ html {
   border-bottom-left-radius: 25px;
 }
 
+.minion {
+  visibility: hidden;
+  position: fixed;
+  width: 25%;
+  top: 500px;
+  left: 20px;
+}
+
 .glyphicon {
   color: black;
   font-size: 40px;
