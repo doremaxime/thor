@@ -1,7 +1,7 @@
 const video = require('./video');
 
 //VOICE
-let errorMsg = document.getElementById('msg');
+let errorMsg = document.querySelector('.msg');
 if (!'speechSynthesis' in window) {
   errorMsg.innerHTML = 'Sorry your browser <strong>does not support</strong> speech synthesis which is a major feature of this website.'
 }
@@ -37,7 +37,7 @@ function speak(e) {
     .join('')
   console.log('transcript is: ' + transcript);
 
-  if (transcript.includes('hey Skynet')) {
+  if (transcript.includes('please')) {
 
     // developing this function to be able to change the voices female-male
     // if (transcript.includes('male voice')) {
@@ -102,16 +102,14 @@ function speak(e) {
     if (transcript.includes('take') && transcript.includes('picture')) {
       video.takePhoto();
     }
-    if (transcript.includes('delete') && transcript.includes('all') && transcript.includes('pictures')) {
-      document.querySelector('.strip').remove();
-    }
-    if (transcript.includes('delete') && transcript.includes('last') && transcript.includes('picture')) {
-      document.querySelector('.strip').lastChild.remove();
-    }
 
     if (transcript.includes('send') && transcript.includes('email') && transcript.includes('to')) {
       let email = contacts[lastWord(transcript)]
       window.location.href = 'mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax';
+    }
+
+    if (transcript.includes('calibrate')) {
+      video.setRGBRange();
     }
   }
 }
