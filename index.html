@@ -20,9 +20,7 @@
 
 <body>
 
-  <button class="calibrate">calibrate</button>
-
-  <p id="msg"></p>
+  <p class="msg"></p>
 
   <img class="ear" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/listening.png" alt="Voice Activated">
 
@@ -51,6 +49,45 @@
   	 <dt><a href="#" class="glyphicon glyphicon-envelope"></a></dt>
      <dt><a href="#" class="glyphicon glyphicon-file"></a></dt>
   </nav>
+
+  <!-- Button trigger Instructions modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Instructions
+  </button>
+  <!-- Instructions Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="modal-title" id="myModalLabel">Instuctions</h2>
+        </div>
+        <div class="modal-body">
+          <p>Welcome! This website allows you to voice commands and to control the site with your hands. As a result, this site can only work if you allow it to access your webcam and microphone.</p>
+          <p>In order to make a voiced command, you must first say "please" (i.e. Please open my portfolio)</p>
+          <p>Current speaking commands:</p>
+          <ul>
+            <li>What time is it?</li>
+            <li>What is the weather in...?</li>
+            <li>Open my portfolio</li>
+            <li>Take a picture</li>
+            <li>search Google for...</li>
+            <li>Open/close menu</li>
+            <li>Send email to Max</li>
+            <li>Calibrate</li>
+          </ul>
+          <p>What is calibrate you may ask? Well, at the bottom right corner of the webcam you will see a red square.
+            That is for you to place your finger or palm and say "please calibrate". What calibrate is doing behind the scenes is claculating the average pixel color in that square.
+            It works best if your backgound is of a clear solid color or anything not resembling the pigment of your skin.
+            Once you have clibrated, you will now be able to flip over the webcam by waving your finger/palm in that direction!</p>
+            <p>Please note that <strong>absolutely nothing</strong>, either by webcam or microphone, is being recorded!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <audio class="snap" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/sound/snap.mp3" hidden></audio>
 </body>
