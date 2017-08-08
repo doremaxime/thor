@@ -1,5 +1,3 @@
-const voice = require('./voice');
-
 //video
 const video = document.querySelector('.player');
 const canvas = document.querySelector('.photo');
@@ -32,17 +30,11 @@ let pixelSetOff = setInterval(function() {
     getAverageRGB();
 
     if ((rgb.r > colors[0] && rgb.r < colors[1]) && (rgb.g > colors[2] && rgb.g < colors[3]) && (rgb.b > colors[4] && rgb.b < colors[5])) {
-    console.log('NICE');
-    snap.currentTime = 0;
-    snap.play();
     let container = document.querySelector('.flip-container');
     container.classList.toggle('hover');
     }
-
   }
-
-}, 500);
-
+}, 600);
 
 function setRGBRange(RGBAverage) {
   let redLow = rgb.r - 40;
@@ -103,7 +95,6 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-document.querySelector('.calibrate').addEventListener('click', setRGBRange);
 
 getVideo();
 
@@ -111,5 +102,6 @@ module.exports = {
   getVideo,
   paintToCanvas,
   takePhoto,
-  getAverageRGB
+  getAverageRGB,
+  setRGBRange
 }
