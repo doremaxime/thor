@@ -23,12 +23,13 @@ function loadVoices(message) {
 
 const contacts = {
   Max: 'dore.maxime@gmail.com',
-  Michael: 'mrfinneran@gmail.com',
 }
 
-const lastWord = function(transcript) {
-  return ("" + transcript).replace(/[\s-]+$/, '').split(/[\s-]/).pop();
-};
+// Will be used for future feature
+// const lastWord = function(transcript) {
+//   return ("" + transcript).replace(/[\s-]+$/, '').split(/[\s-]/).pop();
+// };
+// let email = contacts[lastWord(transcript)]
 
 function speak(e) {
   let transcript = Array.from(e.results)
@@ -36,8 +37,6 @@ function speak(e) {
     .map(result => result.transcript)
     .join('')
   console.log('transcript is: ' + transcript);
-
-  if (transcript.includes('please')) {
 
     // developing this function to be able to change the voices female-male
     // if (transcript.includes('male voice')) {
@@ -95,18 +94,25 @@ function speak(e) {
     if (transcript.includes('open') && transcript.includes('portfolio')) {
       window.open('http://www.doremaxime.com', '_blank');
     }
-    if (transcript.includes('close') && transcript.includes('portfolio')) {
-      window.close('http://www.doremaxime.com', '_blank');
+    if (transcript.includes('open') && transcript.includes('LinkedIn')) {
+      window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
+    }
+    if (transcript.includes('open') && transcript.includes('GitHub')) {
+      window.open('https://github.com/doremaxime', '_blank');
     }
 
     if (transcript.includes('take') && transcript.includes('picture')) {
       video.takePhoto();
     }
 
-    if (transcript.includes('send') && transcript.includes('email') && transcript.includes('to')) {
-      let email = contacts[lastWord(transcript)]
-      window.location.href = 'mailto:' + `${email}` + '?subject=Outcomes Project&body=Sent from my iMax';
+    if (transcript.includes('send') && transcript.includes('email')) {
+      window.location.href = 'mailto:?subject=&body=Sent from Maxime Dore\'s website: https://doremaxime.github.io/thor/';
     }
+    if (transcript.includes('have Max join my team')) {
+      let email = contacts.Max;
+      window.location.href = 'mailto:' + `${email}` + '?subject=Congratulations!&body=We would love to have you on our team!';
+    }
+
 
     if (transcript.includes('calibrate')) {
       video.getAverageRGB();
@@ -118,8 +124,6 @@ function speak(e) {
         $('.minion').fadeOut(2500);
       }
     }
-
-  }
 
 }
 
