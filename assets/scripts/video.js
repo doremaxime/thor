@@ -103,5 +103,6 @@ module.exports = {
   paintToCanvas,
   takePhoto,
   getAverageRGB,
-  setRGBRange
+  setRGBRange,
+  RGBAverage
 }
