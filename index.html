@@ -15,16 +15,14 @@
 
   <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyBpJqohhrCziURQ8sZzgB66gQm58EcxCQc"></script>
 </head>
 
 <body>
 
   <p class="msg"></p>
   <img class="minion" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/minion.jpeg" alt="Minion says calibration successful!">
-
   <img class="ear" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/listening.png" alt="Voice Activated">
-
 
   <div class="flip-container">
   	<div class="flipper">
@@ -39,10 +37,12 @@
         </div>
   		</div>
   		<div class="back">
-  			<img class="board" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/board.jpg" alt="busy schedule post board">
+        <div class="mapholder"></div>
   		</div>
   	</div>
   </div>
+
+  <p id="demo"></p>
 
   <nav class="nav">
   	 <dt><a href="#" class="glyphicon glyphicon-home"></a></dt>
@@ -64,11 +64,12 @@
           <h2 class="modal-title" id="myModalLabel">Instuctions</h2>
         </div>
         <div class="modal-body">
-          <p>Welcome! This website allows you to voice commands and to control the site with your hands. As a result, this site can only work if you allow it to access your webcam and microphone.</p>
+          <p>Welcome! This website allows you to voice commands and to control the site with your hands. As a result, this site can only work if you allow it to access your webcam, microphone, and location for Google maps (spoiler!).</p>
           <p>Current speaking commands:</p>
           <ul>
             <li>What time is it?</li>
             <li>What is the weather in...?</li>
+            <li>where am I / Hide the map</li>
             <li>Open portfolio/LinkedIn/GitHub</li>
             <li>Take a picture</li>
             <li>search Google for...</li>
@@ -81,7 +82,7 @@
             That is for you to place your finger or palm over and say "calibrate". What calibrate is doing behind the scenes is claculating the average pixel color in that square (I know... WOW!)
             It works best if your backgound is of a clear solid color or anything not resembling the pigment of your skin.
             Once you have clibrated, you will now be able to flip over the webcam by waving your finger/palm in that direction!</p>
-            <p>Furthermore, please note that <strong>absolutely nothing</strong>, either by webcam or microphone, is being recorded!</p>
+            <p>Furthermore, please note that your location, webcam, and microphone is <strong>not</strong> being recorded!</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
