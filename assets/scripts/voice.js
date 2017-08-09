@@ -145,8 +145,8 @@ function showPosition(position) {
   let lon = position.coords.longitude;
   let latlon = new google.maps.LatLng(lat, lon)
   let mapholder = document.querySelector('.mapholder')
-  mapholder.style.height = '750px';
-  mapholder.style.width = '1000px';
+  // mapholder.style.height = '750px';
+  // mapholder.style.width = '1000px';
 
   let myOptions = {
     center: latlon,

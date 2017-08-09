@@ -66,14 +66,14 @@ html {
 		transform: rotateY(180deg);
 	}
 
-.flip-container, .front, .back {
+.flip-container, .front, .back, .mapholder {
 	width: 1000px;
 	height: 750px;
 }
 
 /* flip speed goes here */
 .flipper {
-	transition: 0.6s;
+	transition: 1.2s;
 	transform-style: preserve-3d;
 	position: relative;
 }
