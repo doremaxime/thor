@@ -9,8 +9,7 @@ let rgb = {
   g: 0,
   b: 0
 };
-let RGBAverage = getAverageRGB();
-let colors;
+let range;
 
 function getVideo() {
   navigator.mediaDevices.getUserMedia({
@@ -25,33 +24,64 @@ function getVideo() {
     });
 }
 
-let pixelSetOff = setInterval(function() {
-  if (colors !== undefined) {
-    getAverageRGB();
+function bottomRightPixels() {
+  pixelTemplate(0, 430, 50, 50);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+  console.log('bottom right');
+  }
+}
 
-    if ((rgb.r > colors[0] && rgb.r < colors[1]) && (rgb.g > colors[2] && rgb.g < colors[3]) && (rgb.b > colors[4] && rgb.b < colors[5])) {
-    let container = document.querySelector('.flip-container');
-    container.classList.toggle('hover');
-    }
+function topRightPixels() {
+  pixelTemplate(0, 0, 50, 50);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+  console.log('top right');
+  }
+}
+
+let pixelMatcher = setInterval(function() {
+  if (range !== undefined) {
+    bottomRightPixels();
+    topRightPixels();
   }
 }, 600);
 
-function setRGBRange(RGBAverage) {
+let calibrate = function() {
+  let rgb = {
+    r: 0,
+    g: 0,
+    b: 0
+  };
+  let blockSize = 4;
+  let i = -4;
+  let count = 0;
+  let data = ctx.getImageData(0, 430, 50, 50);
+  let length = data.data.length;
+
+  while ((i += blockSize * 4) < length) {
+    ++count;
+    rgb.r += data.data[i];
+    rgb.g += data.data[i + 1];
+    rgb.b += data.data[i + 2];
+  }
+
+  rgb.r = ~~(rgb.r / count);
+  rgb.g = ~~(rgb.g / count);
+  rgb.b = ~~(rgb.b / count);
+
   let redLow = rgb.r - 40;
   let redHigh = rgb.r + 40;
   let greenLow = rgb.g - 40;
   let greenHigh = rgb.g + 40;
   let blueLow = rgb.b - 40;
   let blueHigh = rgb.b + 40;
-  colors = [redLow, redHigh, greenLow, greenHigh, blueLow, blueHigh];
+  range = [redLow, redHigh, greenLow, greenHigh, blueLow, blueHigh];
 }
 
-function getAverageRGB() {
+function pixelTemplate(sx, sy, sw, sh) {
   let blockSize = 4; // only visit every 5 pixels
   let i = -4;
   let count = 0;
-  // let data = ctx.getImageData(10, 10, 50, 50);
-  let data = ctx.getImageData(0, 430, 50, 50);
+  let data = ctx.getImageData(sx, sy, sw, sh);
   let length = data.data.length;
 
   while ((i += blockSize * 4) < length) {
@@ -65,9 +95,6 @@ function getAverageRGB() {
   rgb.r = ~~(rgb.r / count);
   rgb.g = ~~(rgb.g / count);
   rgb.b = ~~(rgb.b / count);
-  // console.log(rgb);
-
-  return rgb;
 }
 
 function paintToCanvas() {
@@ -95,6 +122,7 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas);
+document.querySelector('.calibrate').addEventListener('click', calibrate);
 
 getVideo();
 
@@ -102,7 +130,5 @@ module.exports = {
   getVideo,
   paintToCanvas,
   takePhoto,
-  getAverageRGB,
-  setRGBRange,
-  RGBAverage
+  calibrate,
 }

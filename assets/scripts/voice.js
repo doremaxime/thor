@@ -119,8 +119,7 @@ function speak(e) {
   }
 
   if (transcript.includes('calibrate')) {
-    video.getAverageRGB();
-    video.setRGBRange(video.RGBAverage)
+    video.calibrate();
     $('.minion').fadeIn();
     $('.minion').css('visibility', 'visible');
     setTimeout(minionFadeOut(), 3000);
