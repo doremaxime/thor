@@ -34,7 +34,7 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-  console.log('transcript is: ' + transcript);
+  // console.log('transcript is: ' + transcript);
 
   // developing this function to be able to change the voices female-male
   // if (transcript.includes('male voice')) {
@@ -44,17 +44,7 @@ function speak(e) {
   // }
 
   if (transcript.includes('what') && transcript.includes('time')) {
-    let date = new Date();
-    let hours = date.getHours();
-    if (hours > 12) {
-      hours -= 12
-    }
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-      minutes = '0 ' + minutes;
-    }
-    let time = ('It is ' + hours + ' ' + minutes)
-    loadVoices(time)
+    time();
   }
 
   if (transcript.includes('open') && transcript.includes('menu')) {
@@ -131,6 +121,20 @@ function speak(e) {
 
 }
 
+function time() {
+  let date = new Date();
+  let hours = date.getHours();
+  if (hours > 12) {
+    hours -= 12
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = '0 ' + minutes;
+  }
+  let time = ('It is ' + hours + ' ' + minutes)
+  loadVoices(time)
+}
+
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -190,4 +194,5 @@ getLocation();
 module.exports = {
   loadVoices,
   speak,
+  time
 }

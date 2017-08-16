@@ -1,3 +1,6 @@
+const voice = require('./voice');
+
+
 //video
 const video = document.querySelector('.player');
 const canvas = document.querySelector('.photo');
@@ -24,6 +27,24 @@ function getVideo() {
     });
 }
 
+function paintToCanvas() {
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+  canvas.width = width;
+  canvas.height = height;
+
+  return setInterval(() => {
+    ctx.drawImage(video, 0, 0, width, height);
+  }, 16);
+}
+
+let pixelMatcher = setInterval(function() {
+  if (range !== undefined) {
+    bottomRightPixels();
+    topRightPixels();
+  }
+}, 600);
+
 function bottomRightPixels() {
   pixelTemplate(0, 430, 50, 50);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
@@ -35,15 +56,18 @@ function topRightPixels() {
   pixelTemplate(0, 0, 50, 50);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
   console.log('top right');
+  voice.time();
   }
 }
 
-let pixelMatcher = setInterval(function() {
-  if (range !== undefined) {
-    bottomRightPixels();
-    topRightPixels();
+function topRightPixels() {
+  pixelTemplate(590, 0, 50, 50);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+  console.log('top left');
+  let container = document.querySelector('.flip-container');
+  container.classList.toggle('hover');
   }
-}, 600);
+}
 
 let calibrate = function() {
   let rgb = {
@@ -95,17 +119,6 @@ function pixelTemplate(sx, sy, sw, sh) {
   rgb.r = ~~(rgb.r / count);
   rgb.g = ~~(rgb.g / count);
   rgb.b = ~~(rgb.b / count);
-}
-
-function paintToCanvas() {
-  const width = video.videoWidth;
-  const height = video.videoHeight;
-  canvas.width = width;
-  canvas.height = height;
-
-  return setInterval(() => {
-    ctx.drawImage(video, 0, 0, width, height);
-  }, 16);
 }
 
 function takePhoto() {
