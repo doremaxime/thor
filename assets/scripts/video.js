@@ -1,4 +1,4 @@
-const voice = require('./voice');
+// const voice = require('./voice');
 
 
 //video
@@ -42,6 +42,7 @@ let pixelMatcher = setInterval(function() {
   if (range !== undefined) {
     bottomRightPixels();
     topRightPixels();
+    topLeftPixels();
   }
 }, 600);
 
@@ -56,11 +57,11 @@ function topRightPixels() {
   pixelTemplate(0, 0, 50, 50);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
   console.log('top right');
-  voice.time();
+  window.open('https://www.cybba.com/', '_blank');
   }
 }
 
-function topRightPixels() {
+function topLeftPixels() {
   pixelTemplate(590, 0, 50, 50);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
   console.log('top left');
@@ -135,7 +136,7 @@ function takePhoto() {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-document.querySelector('.calibrate').addEventListener('click', calibrate);
+// document.querySelector('.calibrate').addEventListener('click', calibrate);
 
 getVideo();
 
