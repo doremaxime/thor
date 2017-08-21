@@ -7,8 +7,14 @@
   <title>Thor</title>
 
   <!-- prevents FOUC -->
-  <style type="text/css"> .no-fouc {display: none;} </style>
-  <script type="text/javascript"> document.documentElement.className = 'no-fouc'; </script>
+  <style type="text/css">
+    .no-fouc {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript">
+    document.documentElement.className = 'no-fouc';
+  </script>
 
   <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/hammer.png">
 
@@ -27,32 +33,40 @@
   <!-- <button class="calibrate">calibrate</button> -->
 
   <div class="flip-container">
-  	<div class="flipper">
-  		<div class="front">
+    <div class="flipper">
+      <div class="front">
         <div class="photobooth">
           <div class="controls">
           </div>
-            <canvas class="photo"></canvas>
-            <div class="calibration-box"></div>
-            <div class="top-right-box">Cybba</div>
-            <div class="top-left-box">MAP</div>
-          <video class="player" hidden></video>
+          <canvas class="photo"></canvas>
+          <div id="calibration-box"></div>
+          <div id="top-right-box">Menu</div>
+          <div class="menu-boxes">
+            <div id="top-left-one-box">Map</div>
+            <div class="all-but-map">
+              <div id="top-left-two-box">Game</div>
+              <div id="top-left-three-box">Hire Max</div>
+              <div id="top-left-four-box">LinkedIn</div>
+              <div id="top-left-five-box">GitHub</div>
+              <div id="top-left-six-box">Portfolio</div>
+            </div>
+          </div>
           <div class="strip"></div>
         </div>
-  		</div>
-  		<div class="back">
+      </div>
+      <div class="back">
         <div class="mapholder"></div>
-  		</div>
-  	</div>
+      </div>
+    </div>
   </div>
+  <video class="player"></video>
 
-  <p id="demo"></p>
 
   <nav class="nav">
-  	 <dt><a href="#" class="glyphicon glyphicon-home"></a></dt>
-  	 <dt><a href="#" class="glyphicon glyphicon-search"></a></dt>
-  	 <dt><a href="#" class="glyphicon glyphicon-envelope"></a></dt>
-     <dt><a href="#" class="glyphicon glyphicon-file"></a></dt>
+    <dt><a href="#" class="glyphicon glyphicon-home"></a></dt>
+    <dt><a href="#" class="glyphicon glyphicon-search"></a></dt>
+    <dt><a href="#" class="glyphicon glyphicon-envelope"></a></dt>
+    <dt><a href="#" class="glyphicon glyphicon-file"></a></dt>
   </nav>
 
   <!-- Button trigger Instructions modal -->
@@ -82,11 +96,10 @@
             <li>Send email</li>
             <li>Calibrate</li>
           </ul>
-          <p>What is calibrate you may ask? Well that's a great question! At the bottom right corner of the webcam you will see a red square.
-            That is for you to place your finger or palm over and say "calibrate". What calibrate is doing behind the scenes is calculating the average pixel color in that square (I know... WOW!)
-            It works best if your backgound is of a clear and solid color (anything not resembling the pigment of your skin if that's what you use).
-            Once you have calibrated, you will now be able to wave at the other square to create actions!</p>
-            <p>Furthermore, please note that your location, webcam, and microphone is <strong>not</strong> being recorded!</p>
+          <p>What is calibrate you may ask? Well that's a great question! At the bottom right corner of the webcam you will see a red dotted square. That is for you to place your finger or palm over and say "calibrate". What calibrate is doing behind the
+            scenes is calculating the average pixel color in that square (I know... WOW!) It is very important that your backgound is of a different color than the color you use for calibrating, otherwise, certain boxes may be set off unintentionally. Once you have calibrated,
+            you will now be able to wave at the menu box in the top right corner and then wave or touch other squares; set them off and see what they do!</p>
+          <p>Furthermore, please note that your location, webcam, and microphone is <strong>not</strong> being recorded!</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

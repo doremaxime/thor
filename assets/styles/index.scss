@@ -14,7 +14,9 @@ html {
   text-align: center;
 }
 
-*, *:before, *:after {
+*,
+*:after,
+*:before {
   box-sizing: inherit;
 }
 
@@ -34,15 +36,15 @@ html {
 
 .btn-lg {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
 }
 
 .nav {
   background: rgba(153, 197, 250, 0.79);
   visibility: hidden;
   position: fixed;
-  right: 0%;
+  right: 0;
   top: 15%;
   width: 8em;
   margin-top: -2.5em;
@@ -63,84 +65,117 @@ html {
   font-size: 40px;
   padding: 10px 40px;
 }
-
 /* entire container, keeps perspective */
 .flip-container {
-	perspective: 1000px;
+  perspective: 1000px;
 }
-	/* flip the pane when hovered */
+/* flip the pane when hovered */
 .flip-container.hover .flipper {
-		transform: rotateY(180deg);
-	}
+  transform: rotateY(180deg);
+}
 
-.flip-container, .front, .back, .mapholder {
-	width: 1000px;
-	height: 750px;
+.back,
+.flip-container,
+.front,
+.mapholder {
+  width: 1000px;
+  height: 750px;
 }
 
 /* flip speed goes here */
 .flipper {
-	transition: 1.2s;
-	transform-style: preserve-3d;
-	position: relative;
+  transition: 1.2s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 /* hide back of pane during swap */
-.front, .back {
-	backface-visibility: hidden;
-	position: absolute;
-	// top: 0;
-	// left: 0;
+.back,
+.front {
+  backface-visibility: hidden;
+  position: absolute;
+  // top: 0;
+  // left: 0;
 }
 
 /* front pane, placed above back */
 .front {
-	z-index: 2;
-	/* for firefox 31 */
-	transform: rotateY(0deg);
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
 }
 
 /* back, initially hidden pane */
 .back {
-	transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.photobooth,
-.mapholder {
+.mapholder,
+.photobooth {
   background: white;
   max-width: 150rem;
 }
 
-.calibration-box {
+#calibration-box {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 50px;
-  height: 50px;
-  border: 5px solid red;
-  z-index: 2;
+  bottom: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  border: 3px dotted red;
+  z-index: 1;
 }
 
-.top-right-box {
+#top-right-box {
   position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 50px;
-  height: 50px;
-  border: 5px solid red;
-  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 73px;
+  height: 44px;
+  color: red;
+  font-weight: 600;
+  border: 1px solid red;
+  z-index: 1;
 }
 
-.top-left-box {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 50px;
-  height: 50px;
-  border: 5px solid red;
-  z-index: 2;
+.menu-boxes {
+  visibility: hidden;
+  font-weight: 600;
+  color: red;
 }
 
+.menu-boxes div {
+  position: absolute;
+  top: 0;
+  width: 73px;
+  height: 48px;
+  border: 1px solid red;
+  z-index: 1;
+}
+
+#top-left-one-box {
+  left: 0;
+}
+
+#top-left-two-box {
+  left: 125px;
+}
+
+#top-left-three-box {
+  left: 250px;
+}
+
+#top-left-four-box {
+  left: 375px;
+}
+
+#top-left-five-box {
+  left: 500px;
+}
+
+#top-left-six-box {
+  left: 625px;
+}
 /*clearfix*/
 .photobooth:after {
   content: '';
@@ -149,36 +184,51 @@ html {
 }
 
 .photo {
-  width:100%;
-  float:left;
+  width: 100%;
+  float: left;
   transform: rotateY(180deg);
 }
 
 .player {
   position: absolute;
-  top:20px;
+  top: 20px;
   right: 20px;
-  width:200px;
+  width: 200px;
   transform: rotateY(180deg);
+  visibility: hidden;
 }
 
 /*
   Strip!
 */
-
 .strip {
-  padding:2rem;
-}
-.strip img {
-  width:100px;
-  overflow-x: scroll;
-  padding:0.8rem 0.8rem 2.5rem 0.8rem;
-  box-shadow:0 0 3px rgba(0,0,0,0.2);
-  background:white;
+  padding: 2rem;
 }
 
-.strip a:nth-child(5n+1) img { transform: rotate(10deg); }
-.strip a:nth-child(5n+2) img { transform: rotate(-2deg); }
-.strip a:nth-child(5n+3) img { transform: rotate(8deg); }
-.strip a:nth-child(5n+4) img { transform: rotate(-11deg); }
-.strip a:nth-child(5n+5) img { transform: rotate(12deg); }
+.strip img {
+  width: 100px;
+  overflow-x: scroll;
+  padding: 0.8rem 0.8rem 2.5rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  background: white;
+}
+
+.strip a:nth-child(5n+1) img {
+  transform: rotate(10deg);
+}
+
+.strip a:nth-child(5n+2) img {
+  transform: rotate(-2deg);
+}
+
+.strip a:nth-child(5n+3) img {
+  transform: rotate(8deg);
+}
+
+.strip a:nth-child(5n+4) img {
+  transform: rotate(-11deg);
+}
+
+.strip a:nth-child(5n+5) img {
+  transform: rotate(12deg);
+}
