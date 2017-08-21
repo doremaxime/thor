@@ -9,7 +9,7 @@ const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
 let menu = document.querySelector('.menu-boxes');
 let webcam = document.querySelector('.player');
-let allButMap = document.querySelector('.all-but-map');
+let map = false
 let rgb = {
   r: 0,
   g: 0,
@@ -20,7 +20,6 @@ let range;
 // Sets initial for the setIntervals
 menu.style.visibility = 'hidden';
 webcam.style.visibility = 'hidden';
-allButMap.style.visibility = 'hidden';
 
 // gets the video stream from the user's webcam
 function getVideo() {
@@ -73,11 +72,6 @@ function topRightPixels() {
     } else {
       menu.style.visibility = 'hidden';
     }
-    if (allButMap.style.visibility === 'visible') {
-      allButMap.style.visibility = 'hidden';
-    } else {
-      allButMap.style.visibility = 'visible';
-    }
 
   }
 }
@@ -87,7 +81,7 @@ let pixelMatcherTwo = setInterval(function() {
     topLeftOne();
 
     // Does not get called if map is being shown.
-    if (allButMap.style.visibility === 'visible') {
+    if (!map) {
       topLeftTwo();
       topLeftThree();
       topLeftFour();
@@ -114,11 +108,7 @@ function topLeftOne() {
     }
 
     // makes sure other boxes cannot be set off as it is trickier to set off the map one on top-right webcam view.
-    if (allButMap.style.visibility === 'visible') {
-      allButMap.style.visibility = 'hidden';
-    } else {
-      allButMap.style.visibility = 'visible';
-    }
+    map = !map;
 
   }
 }
