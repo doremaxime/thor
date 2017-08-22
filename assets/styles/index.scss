@@ -209,6 +209,15 @@ html {
   display: block;
 }
 
+.rules {
+  position: absolute;
+  top: 200px;
+  left: 40px;
+  width: 350px;
+  font-size: 2em;
+  visibility: hidden;
+}
+
 /*clearfix*/
 .photobooth:after {
   content: '';

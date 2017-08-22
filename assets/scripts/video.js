@@ -11,19 +11,21 @@ let menu = document.querySelector('#top-right-box');
 let menuOptions = document.querySelector('.menu-boxes');
 let webcam = document.querySelector('.player');
 let gameButtons = document.querySelector('.game-buttons');
+let rules = document.querySelector('.rules');
 let map = false;
+let range;
 let rgb = {
   r: 0,
   g: 0,
   b: 0
 };
-let range;
 
 // Sets initial for the setIntervals
 menu.style.visibility = 'visible';
 menuOptions.style.visibility = 'hidden';
 webcam.style.visibility = 'hidden';
 gameButtons.style.visibility = 'hidden';
+rules.style.visibility = 'hidden';
 
 // gets the video stream from the user's webcam
 function getVideo() {
@@ -182,6 +184,7 @@ function gameExit() {
     menuOptions.style.visibility = 'visible';
     menu.style.visibility = 'visible';
     gameButtons.style.visibility = 'hidden';
+    rules.style.visibility = 'hidden';
   }
 }
 
@@ -190,6 +193,8 @@ function gamePlay() {
   pixelTemplate(460, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     console.log('play');
+    rules.style.visibility = 'hidden';
+
   }
 }
 
@@ -198,6 +203,7 @@ function gameRules() {
   pixelTemplate(140, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     console.log('rules');
+    rules.style.visibility = 'visible';
   }
 }
 
