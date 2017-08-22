@@ -136,6 +136,7 @@ html {
   font-weight: 600;
   border: 1px solid red;
   z-index: 1;
+  visibility: visible;
 }
 
 .menu-boxes {
@@ -176,6 +177,38 @@ html {
 #top-left-six-box {
   left: 625px;
 }
+
+.game-buttons {
+  visibility: hidden;
+}
+
+.game-buttons div {
+  position: absolute;
+  width: 73px;
+  height: 44px;
+  color: red;
+  font-weight: 600;
+  border: 1px solid red;
+  z-index: 1;
+}
+
+.game-play {
+  top: 300px;
+  left: 200px;
+}
+
+.game-rules {
+  top: 300px;
+  left: 700px;
+}
+
+.game-exit {
+  bottom: 0;
+  left: 0;
+  line-height: -15px;
+  display: block;
+}
+
 /*clearfix*/
 .photobooth:after {
   content: '';

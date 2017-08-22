@@ -7,9 +7,11 @@ const canvas = document.querySelector('.photo');
 const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
-let menu = document.querySelector('.menu-boxes');
+let menu = document.querySelector('#top-right-box');
+let menuOptions = document.querySelector('.menu-boxes');
 let webcam = document.querySelector('.player');
-let map = false
+let gameButtons = document.querySelector('.game-buttons');
+let map = false;
 let rgb = {
   r: 0,
   g: 0,
@@ -18,8 +20,10 @@ let rgb = {
 let range;
 
 // Sets initial for the setIntervals
-menu.style.visibility = 'hidden';
+menu.style.visibility = 'visible';
+menuOptions.style.visibility = 'hidden';
 webcam.style.visibility = 'hidden';
+gameButtons.style.visibility = 'hidden';
 
 // gets the video stream from the user's webcam
 function getVideo() {
@@ -67,17 +71,17 @@ function topRightPixels() {
     // console.log('top right');
 
     // shows/hides the menu options
-    if (menu.style.visibility === 'hidden') {
-      menu.style.visibility = 'visible';
+    if (menuOptions.style.visibility === 'hidden') {
+      menuOptions.style.visibility = 'visible';
     } else {
-      menu.style.visibility = 'hidden';
+      menuOptions.style.visibility = 'hidden';
     }
 
   }
 }
 
 let pixelMatcherTwo = setInterval(function() {
-  if (menu.style.visibility === 'visible') {
+  if (menuOptions.style.visibility === 'visible') {
     topLeftOne();
 
     // Does not get called if map is being shown.
@@ -89,71 +93,111 @@ let pixelMatcherTwo = setInterval(function() {
       topLeftSix();
     }
   }
+  if (gameButtons.style.visibility === 'visible') {
+    gamePlay();
+    gameRules();
+    gameExit();
+  }
 }, 600);
 
+// map
 function topLeftOne() {
   pixelTemplate(590, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     // console.log('Map');
 
-    // flips the large webcam view to show the map.
-    let container = document.querySelector('.flip-container');
-    container.classList.toggle('hover');
-
-    // Shows the top-right webcam view in when map is shown so as to know where to wave to hide the map.
-    if (webcam.style.visibility === 'hidden') {
-      webcam.style.visibility = 'visible';
-    } else {
-      webcam.style.visibility = 'hidden';
-    }
-
-    // makes sure other boxes cannot be set off as it is trickier to set off the map one on top-right webcam view.
-    map = !map;
+    // // flips the large webcam view to show the map.
+    // let container = document.querySelector('.flip-container');
+    // container.classList.toggle('hover');
+    //
+    // // Shows the top-right webcam view in when map is shown so as to know where to wave to hide the map.
+    // if (webcam.style.visibility === 'hidden') {
+    //   webcam.style.visibility = 'visible';
+    // } else {
+    //   webcam.style.visibility = 'hidden';
+    // }
+    //
+    // // makes sure other boxes cannot be set off as it is trickier to set off the map one on top-right webcam view.
+    // map = !map;
 
   }
 }
 
+// game
 function topLeftTwo() {
   pixelTemplate(510, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('Game needs to be developed');
-    alert('Game is currently being developed, check back soon!')
+    console.log('Game feature');
+    menuOptions.style.visibility = 'hidden';
+    gameButtons.style.visibility = 'visible';
+    menu.style.visibility = 'hidden';
   }
 }
 
+// email
 function topLeftThree() {
   pixelTemplate(430, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     // console.log('hire max');
-    window.location.href = 'mailto:dore.maxime@gmail.com' + '?subject=Congratulations!&body=We would love to have you on our team!';
-    sleepFor(3000);
+    // window.location.href = 'mailto:dore.maxime@gmail.com' + '?subject=Congratulations!&body=We would love to have you on our team!';
+    // sleepFor(3000);
   }
 }
 
+// linkedin
 function topLeftFour() {
   pixelTemplate(350, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     // console.log('top left four');
-    window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
-    sleepFor(3000);
+    // window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
+    // sleepFor(3000);
   }
 }
 
+// github
 function topLeftFive() {
   pixelTemplate(270, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     // console.log('top left five');
-    window.open('https://github.com/doremaxime', '_blank');
-    sleepFor(3000);
+    // window.open('https://github.com/doremaxime', '_blank');
+    // sleepFor(3000);
   }
 }
 
+// portfolio
 function topLeftSix() {
   pixelTemplate(190, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     // console.log('top left six');
-    window.open('http://www.doremaxime.com', '_blank');
-    sleepFor(3000);
+    // window.open('http://www.doremaxime.com', '_blank');
+    // sleepFor(3000);
+  }
+}
+
+// exits the game feature
+function gameExit() {
+  pixelTemplate(590, 450, 50, 30);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+    console.log('exit');
+    menuOptions.style.visibility = 'visible';
+    menu.style.visibility = 'visible';
+    gameButtons.style.visibility = 'hidden';
+  }
+}
+
+// begin the game
+function gamePlay() {
+  pixelTemplate(460, 190, 50, 30);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+    console.log('play');
+  }
+}
+
+// shows game rules
+function gameRules() {
+  pixelTemplate(140, 190, 50, 30);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+    console.log('rules');
   }
 }
 
@@ -192,7 +236,7 @@ let calibrate = function() {
 
   // helps see the area when selecting an area
   // ctx.beginPath();
-  // ctx.rect(0, 0, 50, 50);
+  // ctx.rect(590, 450, 50, 30);
   // ctx.fillStyle = 'yellow';
   // ctx.fill();
 }
@@ -239,7 +283,7 @@ function sleepFor(sleepDuration) {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-// document.querySelector('.calibrate').addEventListener('click', calibrate);
+document.querySelector('.calibrate').addEventListener('click', calibrate);
 
 getVideo();
 
