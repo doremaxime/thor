@@ -53,6 +53,7 @@ function paintToCanvas() {
 let pixelMatcherOne = setInterval(function() {
   if (range !== undefined) {
     topRightPixels();
+    gamePlay();
   }
 }, 1000);
 
@@ -93,7 +94,7 @@ let pixelMatcherTwo = setInterval(function() {
     }
   }
   if (gameButtons.style.visibility === 'visible') {
-    gamePlay();
+    gameStart();
     gameRules();
     gameExit();
   }
@@ -186,7 +187,7 @@ function gameExit() {
 }
 
 // begin the game
-function gamePlay() {
+function gameStart() {
   pixelTemplate(460, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     console.log('play');
@@ -291,7 +292,9 @@ function sleepFor(sleepDuration) {
 // Game
 let sx;
 let sy;
-let game = setInterval(function() { axisChanger() }, 1000);
+let points = 0;
+// let pointDisplay = document.querySelector('.points');
+let game = setInterval(function() { axisChanger() }, 2000);
 
 requestAnimationFrame(animate);
 
@@ -313,10 +316,19 @@ function randomRect() {
   ctx.stroke();
 }
 
+function gamePlay() {
+  pixelTemplate(sx, sy, 50, 30);
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+    points++
+    document.querySelector('.points').innerHTML = 'POINTS: ' + points
+  }
+}
+
+
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 video.addEventListener('canplay', paintToCanvas);
 document.querySelector('.calibrate').addEventListener('click', calibrate);
