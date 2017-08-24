@@ -4,12 +4,14 @@ const canvas = document.querySelector('.photo');
 const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
-let menu = document.querySelector('#top-right-box');
-let menuOptions = document.querySelector('.menu-boxes');
-let webcam = document.querySelector('.player');
-let gameButtons = document.querySelector('.game-buttons');
-let rules = document.querySelector('.rules');
+const menu = document.querySelector('#top-right-box');
+const menuOptions = document.querySelector('.menu-boxes');
+const webcam = document.querySelector('.player');
+const gameButtons = document.querySelector('.game-buttons');
+const rules = document.querySelector('.rules');
+const pointDisplay = document.querySelector('.points');
 let map = false;
+let gameOn = false;
 let range;
 let rgb = {
   r: 0,
@@ -23,6 +25,7 @@ menuOptions.style.visibility = 'hidden';
 webcam.style.visibility = 'hidden';
 gameButtons.style.visibility = 'hidden';
 rules.style.visibility = 'hidden';
+pointDisplay.style.visibility = 'hidden';
 
 // gets the video stream from the user's webcam
 function getVideo() {
@@ -53,22 +56,18 @@ function paintToCanvas() {
 let pixelMatcherOne = setInterval(function() {
   if (range !== undefined) {
     topRightPixels();
-    gamePlay();
   }
 }, 1000);
 
 function bottomRightPixels() {
   pixelTemplate(0, 430, 50, 50);
-  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('bottom right');
-  }
+  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {}
 }
 
 // matches calibrated RGA with menu RGA
 function topRightPixels() {
   pixelTemplate(0, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('top right');
 
     // shows/hides the menu options
     if (menuOptions.style.visibility === 'hidden') {
@@ -94,9 +93,9 @@ let pixelMatcherTwo = setInterval(function() {
     }
   }
   if (gameButtons.style.visibility === 'visible') {
-    gameStart();
-    gameRules();
-    gameExit();
+    gameStartDisplay();
+    gameRulesDisplay();
+    gameExitDisplay();
   }
 }, 600);
 
@@ -104,7 +103,6 @@ let pixelMatcherTwo = setInterval(function() {
 function topLeftOne() {
   pixelTemplate(590, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('Map');
 
     // // flips the large webcam view to show the map.
     // let container = document.querySelector('.flip-container');
@@ -138,7 +136,6 @@ function topLeftTwo() {
 function topLeftThree() {
   pixelTemplate(430, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('hire max');
     // window.location.href = 'mailto:dore.maxime@gmail.com' + '?subject=Congratulations!&body=We would love to have you on our team!';
     // sleepFor(3000);
   }
@@ -148,7 +145,6 @@ function topLeftThree() {
 function topLeftFour() {
   pixelTemplate(350, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('top left four');
     // window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
     // sleepFor(3000);
   }
@@ -158,7 +154,6 @@ function topLeftFour() {
 function topLeftFive() {
   pixelTemplate(270, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('top left five');
     // window.open('https://github.com/doremaxime', '_blank');
     // sleepFor(3000);
   }
@@ -168,39 +163,39 @@ function topLeftFive() {
 function topLeftSix() {
   pixelTemplate(190, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // console.log('top left six');
     // window.open('http://www.doremaxime.com', '_blank');
     // sleepFor(3000);
   }
 }
 
 // exits the game feature
-function gameExit() {
+function gameExitDisplay() {
   pixelTemplate(590, 450, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    console.log('exit');
     menuOptions.style.visibility = 'visible';
     menu.style.visibility = 'visible';
     gameButtons.style.visibility = 'hidden';
     rules.style.visibility = 'hidden';
+    pointDisplay.style.visibility = 'hidden';
   }
 }
 
 // begin the game
-function gameStart() {
+function gameStartDisplay() {
   pixelTemplate(460, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    console.log('play');
     rules.style.visibility = 'hidden';
-
+    pointDisplay.style.visibility = 'visible';
+    gameButtons.style.visibility = 'hidden';
+    // gameOn = true;
+    startGame();
   }
 }
 
 // shows game rules
-function gameRules() {
+function gameRulesDisplay() {
   pixelTemplate(140, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    console.log('rules');
     rules.style.visibility = 'visible';
   }
 }
@@ -290,42 +285,78 @@ function sleepFor(sleepDuration) {
 
 
 // Game
-let sx;
-let sy;
-let points = 0;
-// let pointDisplay = document.querySelector('.points');
-let game = setInterval(function() { axisChanger() }, 2000);
 
-requestAnimationFrame(animate);
+// if (gameOn)
+function startGame() {
+  console.log('Game is on');
+  let sx;
+  let sy;
+  let points = 0;
+  let fail = 0;
+  let axisRefresher = setInterval(function() {
+    axisChanger()
+  }, 2000);
 
-function axisChanger() {
-  sx = getRandomInt(0, 535);
-  sy = getRandomInt(0, 445);
-}
+  let gamePixelMatcher = setInterval(function() {
+    beginPlayingGame()
+  }, 100);
 
-function animate(t) {
   requestAnimationFrame(animate);
-  randomRect();
-}
 
-function randomRect() {
-  ctx.beginPath();          // clear path and sub-paths
-  ctx.rect(sx, sy, 50, 30); // these 4 lines make a hollow rectangle: border only.
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = '#FF0000';
-  ctx.stroke();
-}
-
-function gamePlay() {
-  pixelTemplate(sx, sy, 50, 30);
-  if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    points++
-    document.querySelector('.points').innerHTML = 'POINTS: ' + points
+  function axisChanger() {
+    sx = getRandomInt(0, 535);
+    sy = getRandomInt(0, 445);
   }
-}
+
+  function animate() {
+    requestAnimationFrame(animate);
+    randomRect();
+  }
+
+  function randomRect() {
+    ctx.beginPath(); // clear path and sub-paths
+    ctx.rect(sx, sy, 50, 30); // these 4 lines make a hollow rectangle: border only.
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#FF0000';
+    ctx.stroke();
+  }
+
+  function beginPlayingGame() {
+    pixelTemplate(sx, sy, 50, 30);
+    if (range !== undefined) {
+
+      if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
+        points++
+        console.log(points);
+        document.querySelector('.points').innerHTML = 'POINTS: ' + points;
+
+        // Resets timer and generates new rectangle
+        clearInterval(axisRefresher);
+        axisChanger();
+        axisRefresher = setInterval(axisChanger, 2000);
+      } else {
+        fail++;
+        // console.log(fail);
+      }
+    }
+  }
+
+  // if (fail === 3) {
+  //   gameOver();
+  //   console.log('game over');
+  // }
+
+  function gameOver() {
+    clearInterval(axisRefresher);
+    gameButtons.style.visibility = 'visible';
+    gameOn = false;
+    count = 0;
+  }
+
+};
 
 
-
+// Generates a random number within a range
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
