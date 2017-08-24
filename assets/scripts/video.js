@@ -1,6 +1,3 @@
-// const voice = require('./voice');
-
-
 //video
 const video = document.querySelector('.player');
 const canvas = document.querySelector('.photo');
@@ -282,15 +279,47 @@ function takePhoto() {
   strip.insertBefore(link, strip.firstChild);
 }
 
-// Used when opening tabs for practicality so as to not open multiple accidently
+// called after opening tabs for practicality so as to not open multiple accidently
 function sleepFor(sleepDuration) {
   var now = new Date().getTime();
   while (new Date().getTime() < now + sleepDuration) { /* do nothing */ }
 }
 
+
+
+
+// Game
+let sx;
+let sy;
+let game = setInterval(function() { axisChanger() }, 1000);
+
+requestAnimationFrame(animate);
+
+function axisChanger() {
+  sx = getRandomInt(0, 535);
+  sy = getRandomInt(0, 445);
+}
+
+function animate(t) {
+  requestAnimationFrame(animate);
+  randomRect();
+}
+
+function randomRect() {
+  ctx.beginPath();          // clear path and sub-paths
+  ctx.rect(sx, sy, 50, 30); // these 4 lines make a hollow rectangle: border only.
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#FF0000';
+  ctx.stroke();
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 video.addEventListener('canplay', paintToCanvas);
 document.querySelector('.calibrate').addEventListener('click', calibrate);
-
 getVideo();
 
 module.exports = {
