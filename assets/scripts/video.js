@@ -53,7 +53,7 @@ function paintToCanvas() {
 }
 
 let pixelMatcherOne = setInterval(function() {
-  if (range !== undefined) {
+  if ((range !== undefined) && (menu.style.visibility === 'visible')) {
     topRightPixels();
   }
 }, 1000);
@@ -194,6 +194,7 @@ function gameRulesDisplay() {
   pixelTemplate(140, 190, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
     rules.style.visibility = 'visible';
+    pointDisplay.style.visibility = 'hidden';
   }
 }
 
@@ -287,13 +288,13 @@ function startGame() {
 
   let sx;
   let sy;
-  let count;
+  let width = 50;
+  let height = 30;
   let points = 0;
   let fail = 0;
 
   let axisRefresher = setInterval(function() {
     axisChanger();
-    count++;
   }, 2000);
 
   let gamePixelMatcher = setInterval(function() {
@@ -314,10 +315,10 @@ function startGame() {
 
   function randomRect() {
     ctx.beginPath(); // clear path and sub-paths
-    ctx.rect(sx, sy, 50, 30); // these 4 lines make a hollow rectangle: border only.
+    ctx.strokeRect(sx, sy, width, height); // these 4 lines make a hollow rectangle: border only.
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#FF0000';
-    ctx.stroke();
+    // ctx.stroke();
   }
 
   function beginPlayingGame() {
@@ -326,17 +327,17 @@ function startGame() {
 
       if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
         points++
-        console.log(points);
+        // console.log(points);
         document.querySelector('.points').innerHTML = 'POINTS: ' + points;
 
         // Resets timer and generates new rectangle
         clearInterval(axisRefresher);
         axisChanger();
         axisRefresher = setInterval(axisChanger, 2000);
-        count--;
+        fail = 0;
       } else {
         fail++;
-        console.log(fail);
+        // console.log(fail);
         if (fail === 70) {
           gameOver()
         }
@@ -345,11 +346,15 @@ function startGame() {
   }
 
   function gameOver() {
+    sx = null;
+    sy = null;
+    width = null;
+    height = null;
     clearInterval(axisRefresher);
     clearInterval(gamePixelMatcher);
     gameButtons.style.visibility = 'visible';
-    count = 0;
     fail = 0;
+    points = 0;
   }
 
 };
