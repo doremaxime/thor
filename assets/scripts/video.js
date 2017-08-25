@@ -103,19 +103,19 @@ function topLeftOne() {
   pixelTemplate(590, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
 
-    // // flips the large webcam view to show the map.
-    // let container = document.querySelector('.flip-container');
-    // container.classList.toggle('hover');
-    //
-    // // Shows the top-right webcam view in when map is shown so as to know where to wave to hide the map.
-    // if (webcam.style.visibility === 'hidden') {
-    //   webcam.style.visibility = 'visible';
-    // } else {
-    //   webcam.style.visibility = 'hidden';
-    // }
-    //
-    // // makes sure other boxes cannot be set off as it is trickier to set off the map one on top-right webcam view.
-    // map = !map;
+    // flips the large webcam view to show the map.
+    let container = document.querySelector('.flip-container');
+    container.classList.toggle('hover');
+
+    // Shows the top-right webcam view in when map is shown so as to know where to wave to hide the map.
+    if (webcam.style.visibility === 'hidden') {
+      webcam.style.visibility = 'visible';
+    } else {
+      webcam.style.visibility = 'hidden';
+    }
+
+    // makes sure other boxes cannot be set off as it is trickier to set off the map one on top-right webcam view.
+    map = !map;
 
   }
 }
@@ -134,8 +134,8 @@ function topLeftTwo() {
 function topLeftThree() {
   pixelTemplate(430, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // window.location.href = 'mailto:dore.maxime@gmail.com' + '?subject=Congratulations!&body=We would love to have you on our team!';
-    // sleepFor(3000);
+    window.location.href = 'mailto:dore.maxime@gmail.com' + '?subject=Congratulations!&body=We would love to have you on our team!';
+    sleepFor(3000);
   }
 }
 
@@ -143,8 +143,8 @@ function topLeftThree() {
 function topLeftFour() {
   pixelTemplate(350, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
-    // sleepFor(3000);
+    window.open('https://www.linkedin.com/in/doremaxime/?locale=en_US', '_blank');
+    sleepFor(3000);
   }
 }
 
@@ -152,8 +152,8 @@ function topLeftFour() {
 function topLeftFive() {
   pixelTemplate(270, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // window.open('https://github.com/doremaxime', '_blank');
-    // sleepFor(3000);
+    window.open('https://github.com/doremaxime', '_blank');
+    sleepFor(3000);
   }
 }
 
@@ -161,8 +161,8 @@ function topLeftFive() {
 function topLeftSix() {
   pixelTemplate(190, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    // window.open('http://www.doremaxime.com', '_blank');
-    // sleepFor(3000);
+    window.open('http://www.doremaxime.com', '_blank');
+    sleepFor(3000);
   }
 }
 
@@ -231,7 +231,7 @@ let calibrate = function() {
   let blueHigh = rgb.b + 40;
   range = [redLow, redHigh, greenLow, greenHigh, blueLow, blueHigh];
 
-  // helps see the area when selecting an area
+  // // helps see the area when selecting an area
   // ctx.beginPath();
   // ctx.rect(590, 450, 50, 30);
   // ctx.fillStyle = 'yellow';
@@ -280,12 +280,8 @@ function sleepFor(sleepDuration) {
 }
 
 
-
-
 // Game
-
 function startGame() {
-
   let sx;
   let sy;
   let width = 50;
@@ -318,7 +314,6 @@ function startGame() {
     ctx.strokeRect(sx, sy, width, height); // these 4 lines make a hollow rectangle: border only.
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#FF0000';
-    // ctx.stroke();
   }
 
   function beginPlayingGame() {
@@ -326,8 +321,7 @@ function startGame() {
     if (range !== undefined) {
 
       if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-        points++
-        // console.log(points);
+        points++;
         document.querySelector('.points').innerHTML = 'POINTS: ' + points;
 
         // Resets timer and generates new rectangle
@@ -337,9 +331,8 @@ function startGame() {
         fail = 0;
       } else {
         fail++;
-        // console.log(fail);
         if (fail === 70) {
-          gameOver()
+          gameOver();
         }
       }
     }
@@ -359,14 +352,13 @@ function startGame() {
 
 };
 
-
 // Generates a random number within a range
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 video.addEventListener('canplay', paintToCanvas);
-document.querySelector('.calibrate').addEventListener('click', calibrate);
+// document.querySelector('.calibrate').addEventListener('click', calibrate);
 getVideo();
 
 module.exports = {
