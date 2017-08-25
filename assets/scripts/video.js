@@ -11,7 +11,6 @@ const gameButtons = document.querySelector('.game-buttons');
 const rules = document.querySelector('.rules');
 const pointDisplay = document.querySelector('.points');
 let map = false;
-let gameOn = false;
 let range;
 let rgb = {
   r: 0,
@@ -125,7 +124,6 @@ function topLeftOne() {
 function topLeftTwo() {
   pixelTemplate(510, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
-    console.log('Game feature');
     menuOptions.style.visibility = 'hidden';
     gameButtons.style.visibility = 'visible';
     menu.style.visibility = 'hidden';
@@ -187,7 +185,6 @@ function gameStartDisplay() {
     rules.style.visibility = 'hidden';
     pointDisplay.style.visibility = 'visible';
     gameButtons.style.visibility = 'hidden';
-    // gameOn = true;
     startGame();
   }
 }
@@ -286,19 +283,21 @@ function sleepFor(sleepDuration) {
 
 // Game
 
-// if (gameOn)
 function startGame() {
-  console.log('Game is on');
+
   let sx;
   let sy;
+  let count;
   let points = 0;
   let fail = 0;
+
   let axisRefresher = setInterval(function() {
-    axisChanger()
+    axisChanger();
+    count++;
   }, 2000);
 
   let gamePixelMatcher = setInterval(function() {
-    beginPlayingGame()
+    beginPlayingGame();
   }, 100);
 
   requestAnimationFrame(animate);
@@ -334,23 +333,23 @@ function startGame() {
         clearInterval(axisRefresher);
         axisChanger();
         axisRefresher = setInterval(axisChanger, 2000);
+        count--;
       } else {
         fail++;
-        // console.log(fail);
+        console.log(fail);
+        if (fail === 70) {
+          gameOver()
+        }
       }
     }
   }
 
-  // if (fail === 3) {
-  //   gameOver();
-  //   console.log('game over');
-  // }
-
   function gameOver() {
     clearInterval(axisRefresher);
+    clearInterval(gamePixelMatcher);
     gameButtons.style.visibility = 'visible';
-    gameOn = false;
     count = 0;
+    fail = 0;
   }
 
 };
