@@ -374,7 +374,7 @@ function getRandomInt(min, max) {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-document.querySelector('.calibrate').addEventListener('click', calibrate);
+// document.querySelector('.calibrate').addEventListener('click', calibrate);
 getVideo();
 
 module.exports = {
