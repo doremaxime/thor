@@ -11,6 +11,7 @@ const gameButtons = document.querySelector('.game-buttons');
 const rules = document.querySelector('.rules');
 const pointDisplay = document.querySelector('.points');
 let map = false;
+let points = 0;
 let range;
 let rgb = {
   r: 0,
@@ -65,6 +66,7 @@ function bottomRightPixels() {
 
 // matches calibrated RGA with menu RGA
 function topRightPixels() {
+  // Gets the area to be scanned for matching pixels.
   pixelTemplate(0, 0, 50, 30);
   if ((rgb.r > range[0] && rgb.r < range[1]) && (rgb.g > range[2] && rgb.g < range[3]) && (rgb.b > range[4] && rgb.b < range[5])) {
 
@@ -186,6 +188,7 @@ function gameStartDisplay() {
     pointDisplay.style.visibility = 'visible';
     gameButtons.style.visibility = 'hidden';
     startGame();
+    document.querySelector('.points').innerHTML = 'POINTS: ' + points;
   }
 }
 
@@ -286,12 +289,12 @@ function startGame() {
   let sy;
   let width = 50;
   let height = 30;
-  let points = 0;
   let fail = 0;
+  let speed = 2000;
 
   let axisRefresher = setInterval(function() {
     axisChanger();
-  }, 2000);
+  }, speed);
 
   let gamePixelMatcher = setInterval(function() {
     beginPlayingGame();
@@ -299,6 +302,7 @@ function startGame() {
 
   requestAnimationFrame(animate);
 
+  // sets where a rectangle will appear on canvas, x & y axis
   function axisChanger() {
     sx = getRandomInt(0, 535);
     sy = getRandomInt(0, 445);
@@ -306,10 +310,10 @@ function startGame() {
 
   function animate() {
     requestAnimationFrame(animate);
-    randomRect();
+    rectangle();
   }
 
-  function randomRect() {
+  function rectangle() {
     ctx.beginPath(); // clear path and sub-paths
     ctx.strokeRect(sx, sy, width, height); // these 4 lines make a hollow rectangle: border only.
     ctx.lineWidth = 2;
@@ -317,6 +321,7 @@ function startGame() {
   }
 
   function beginPlayingGame() {
+    // Gets the area to be scanned for matching pixels.
     pixelTemplate(sx, sy, 50, 30);
     if (range !== undefined) {
 
@@ -327,17 +332,28 @@ function startGame() {
         // Resets timer and generates new rectangle
         clearInterval(axisRefresher);
         axisChanger();
-        axisRefresher = setInterval(axisChanger, 2000);
+        axisRefresher = setInterval(axisChanger, speed);
+
+        // makes the speed faster every time.
+        if (speed !== 300) {
+          speed -= 100
+        }
+
+        // resets the fails.
         fail = 0;
+
       } else {
         fail++;
         if (fail === 70) {
           gameOver();
         }
       }
+
     }
+
   }
 
+  // ends the game, resets variables and shows the game buttons.
   function gameOver() {
     sx = null;
     sy = null;
@@ -358,7 +374,7 @@ function getRandomInt(min, max) {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-// document.querySelector('.calibrate').addEventListener('click', calibrate);
+document.querySelector('.calibrate').addEventListener('click', calibrate);
 getVideo();
 
 module.exports = {
