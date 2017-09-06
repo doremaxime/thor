@@ -5,12 +5,9 @@ html {
   box-sizing: border-box;
 }
 
-.flip-container {
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  top: 2%;
-  position: absolute;
+body {
+  background: url(./background.png);
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -20,45 +17,37 @@ html {
   box-sizing: inherit;
 }
 
-.ear {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-  width: 80px;
-}
-
-.calibrate {
-  position: fixed;
-  bottom: 10em;
-  right: 5em;
-  width: 80px;
+.flip-container {
+  margin: 30px auto;
+  box-shadow: 0px 10px 15px #888888;
 }
 
 .btn-lg {
-  position: fixed;
-  top: 15px;
-  left: 15px;
+  margin-top: 10px;
   border-radius: 0;
+  font-size: 50px;
+  box-shadow: 0px 10px 15px #888888;
 }
 
-.nav {
-  background: rgba(153, 197, 250, 0.79);
-  visibility: hidden;
-  position: fixed;
-  right: 0;
-  top: 15%;
-  width: 8em;
-  margin-top: -2.5em;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+.modal-content {
+  background-color: #ADD8E6;
+  text-align: left;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.modal-body{
+  font-size: 18px;
 }
 
 .minion {
   visibility: hidden;
-  position: fixed;
-  width: 25%;
-  top: 500px;
-  left: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -240px;
 }
 
 .glyphicon {
@@ -66,6 +55,7 @@ html {
   font-size: 40px;
   padding: 10px 40px;
 }
+
 /* entire container, keeps perspective */
 .flip-container {
   perspective: 1000px;
@@ -95,8 +85,6 @@ html {
 .front {
   backface-visibility: hidden;
   position: absolute;
-  // top: 0;
-  // left: 0;
 }
 
 /* front pane, placed above back */
@@ -113,7 +101,7 @@ html {
 
 .mapholder,
 .photobooth {
-  background: white;
+  // background: white;
   max-width: 150rem;
 }
 
@@ -210,13 +198,20 @@ html {
   display: block;
 }
 
-.rules, .points {
+.rules {
+  font-size: 2em;
+  visibility: hidden;
+  margin-top: -60px;
+}
+
+.points {
   position: absolute;
-  top: 200px;
-  left: 40px;
+  top: 0;
+  right: 0;
   width: 350px;
   font-size: 2em;
   visibility: hidden;
+  text-align: right;
 }
 
 /*clearfix*/
@@ -233,9 +228,6 @@ html {
 }
 
 .player {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   width: 200px;
   transform: rotateY(180deg);
   visibility: hidden;

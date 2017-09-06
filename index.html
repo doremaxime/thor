@@ -25,26 +25,21 @@
 
 <body>
 
-  <div class="rules">
-    <p>Boxes will be generated randomly on the webcam.</p><br>
-    <p>You must hover over the boxes to get points and the more you get the faster the boxes will disappear!</p><br>
-    <p>The game will be over if you miss 3 in a row!</p><br>
-  </div>
+  <!-- Button trigger Instructions modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    -Instructions- <br> <span class="glyphicon glyphicon-facetime-video"></span> <span class="glyphicon btn-xs glyphicon-volume-up"></span>
+  </button>
+
   <div class="points">POINTS: </div>
   <p class="msg"></p>
-  <img class="minion" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/minion.jpeg" alt="Minion says calibration successful!">
-  <img class="ear" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/listening.png" alt="Voice Activated">
-
-  <!-- for testing , not production -->
-  <!-- <button class="calibrate">calibrate</button> -->
 
   <div class="flip-container">
     <div class="flipper">
+
+      <!-- The webcam and photos -->
       <div class="front">
-        <div class="photobooth">
-          <div class="controls">
-          </div>
           <canvas class="photo"></canvas>
+
           <div id="calibration-box"></div>
           <div id="top-right-box">Menu</div>
           <div class="menu-boxes">
@@ -60,28 +55,30 @@
             <div class="game-rules">Rules</div>
             <div class="game-exit">X</div>
           </div>
+
+          <div class="photobooth">
           <div class="strip"></div>
-        </div>
+          </div>
       </div>
+
       <div class="back">
         <div class="mapholder"></div>
       </div>
+
     </div>
   </div>
+
+  <img class="minion" src="https://raw.githubusercontent.com/doremaxime/thor/master/assets/styles/minion.png" alt="Minion says calibration successful!">
+
+  <!-- smaller webcam view when the map shown -->
   <video class="player"></video>
 
+  <div class="rules">
+    <p>Boxes will be generated randomly on the webcam.</p><br>
+    <p>You must hover over the boxes to get points and the more you get the faster the boxes will disappear!</p><br>
+    <p>The game will be over if you miss too many in a row!</p><br>
+  </div>
 
-  <nav class="nav">
-    <dt><a href="#" class="glyphicon glyphicon-home"></a></dt>
-    <dt><a href="#" class="glyphicon glyphicon-search"></a></dt>
-    <dt><a href="#" class="glyphicon glyphicon-envelope"></a></dt>
-    <dt><a href="#" class="glyphicon glyphicon-file"></a></dt>
-  </nav>
-
-  <!-- Button trigger Instructions modal -->
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Instructions
-  </button>
   <!-- Instructions Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -96,12 +93,11 @@
           <ul>
             <li>What time is it?</li>
             <li>What is the weather in...?</li>
-            <li>where am I / Hide the map</li>
-            <li>change to male/female voice</li>
+            <li>Where am I / Hide the map</li>
+            <li>Change to male/female voice</li>
             <li>Open portfolio/LinkedIn/GitHub</li>
             <li>Take a picture</li>
-            <li>search Google for...</li>
-            <li>Open/close menu</li>
+            <li>Search Google for...</li>
             <li>Have Max join my team</li>
             <li>Send email</li>
             <li>Calibrate</li>

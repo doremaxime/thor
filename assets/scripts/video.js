@@ -187,6 +187,7 @@ function gameStartDisplay() {
     rules.style.visibility = 'hidden';
     pointDisplay.style.visibility = 'visible';
     gameButtons.style.visibility = 'hidden';
+    rules.style.visibility = 'hidden';
     startGame();
     document.querySelector('.points').innerHTML = 'POINTS: ' + points;
   }
@@ -374,7 +375,6 @@ function getRandomInt(min, max) {
 }
 
 video.addEventListener('canplay', paintToCanvas);
-// document.querySelector('.calibrate').addEventListener('click', calibrate);
 getVideo();
 
 module.exports = {
