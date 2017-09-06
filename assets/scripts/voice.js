@@ -14,12 +14,29 @@ window.speechSynthesis.onvoiceschanged = function() {
   voices = window.speechSynthesis.getVoices();
 };
 
+// on pageload the voice is set to a female voice
+let femaleVoice = true;
 function loadVoices(message) {
   const msg = new SpeechSynthesisUtterance();
-  msg.voice = voices[48];
+
+  if (femaleVoice) {
+    msg.voice = voices[48];
+  } else {
+    msg.voice = voices[50];
+  }
+
   msg.text = message;
   speechSynthesis.speak(msg);
 };
+
+// changes the gender of the SpeechSynthesisUtterance voice
+function changeVoice() {
+  if (femaleVoice) {
+    femaleVoice = false;
+  } else {
+    femaleVoice = true;
+  }
+}
 
 const contacts = {
   Max: 'dore.maxime@gmail.com',
@@ -34,14 +51,13 @@ function speak(e) {
     .map(result => result[0])
     .map(result => result.transcript)
     .join('')
-  // console.log('transcript is: ' + transcript);
+  console.log('transcript is: ' + transcript);
 
-  // developing this function to be able to change the voices female-male
-  // if (transcript.includes('male voice')) {
-  //   let message = ('I now have a male voice');
-  //   let voice = voices[50];
-  //   loadVoices(message, voice);
-  // }
+  if (transcript.includes('male voice') || transcript.includes('female voice') ) {
+    changeVoice();
+    let message = ('I now have a different voice');
+    loadVoices(message);
+  }
 
   if (transcript.includes('what') && transcript.includes('time')) {
     time();
@@ -148,8 +164,6 @@ function showPosition(position) {
   let lon = position.coords.longitude;
   let latlon = new google.maps.LatLng(lat, lon)
   let mapholder = document.querySelector('.mapholder')
-  // mapholder.style.height = '750px';
-  // mapholder.style.width = '1000px';
 
   let myOptions = {
     center: latlon,
