@@ -1,7 +1,11 @@
 {
-  "name": "ga-wdi-boston.browser-template",
+  "name": "no-touchy",
   "version": "0.0.3",
   "private": true,
+  "engines": {
+    "node": "10.15.x",
+    "npm": "6x"
+  },
   "license": {
     "software": "GNU GPLv3",
     "content": "CC­BY­NC­SA 4.0"
