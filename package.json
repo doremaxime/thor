@@ -6,6 +6,9 @@
     "node": "10.15.x",
     "npm": "6.x"
   },
+  "scripts": {
+  "start": "node server.js"
+  },
   "license": {
     "software": "GNU GPLv3",
     "content": "CC­BY­NC­SA 4.0"
