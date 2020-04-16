@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "10.15.x",
-    "npm": "6x"
+    "npm": "6.x"
   },
   "license": {
     "software": "GNU GPLv3",
